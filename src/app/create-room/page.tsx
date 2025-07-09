@@ -1,6 +1,7 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
+import Link from 'next/link'
 
 type GetRoomsApiResponse = Array<{
   id: string
@@ -21,11 +22,14 @@ export default function CreateRoom() {
 
   return (
     <div>
-      <h1>Create Room</h1>
       {isLoading && <p>Loading...</p>}
-      <div>
+      <div className="flex flex-col gap-2">
         {data?.map((room) => {
-          return <p key={room.id}>{room.name}</p>
+          return (
+            <Link href={`/room/${room.id}`} key={room.id}>
+              {room.name}
+            </Link>
+          )
         })}
       </div>
     </div>
